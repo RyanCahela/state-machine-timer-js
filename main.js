@@ -9,7 +9,8 @@ const btnStart = document.querySelector(".js-timer-btn-start");
 const btnStop = document.querySelector(".js-timer-btn-stop");
 const btnReset = document.querySelector(".js-timer-btn-reset");
 
-const timerOutput = document.querySelector(".js-timer-output");
+const secondsOutput = document.querySelector(".js-seconds-output");
+const minutesOutput = document.querySelector(".js-minutes-output");
 
 btnStart.addEventListener("click", () => {
   console.log("click");
@@ -80,6 +81,10 @@ function tick() {
 
 function updateDOM(state) {
   const elapsedTime = state.currentTime - state.startTime;
-  const seconds = elapsedTime / 1000;
-  timerOutput.textContent = Math.floor(seconds);
+  const totalSeconds = elapsedTime / 1000;
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+
+  secondsOutput.textContent = String(seconds).padStart(2, "0");
+  minutesOutput.textContent = String(minutes).padStart(2, "0");
 }
