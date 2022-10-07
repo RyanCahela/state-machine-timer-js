@@ -26,10 +26,11 @@ const reducer = (state, action) => {
       if (action.type === "start") {
         const newState = {
           ...state,
-          startTime: new Date(),
-          currentTime: new Date(),
+          startTime: Date.now(),
+          currentTime: Date.now(),
           currentState: "RUNNING",
         };
+        tick();
         return newState;
       }
       break;
@@ -64,14 +65,21 @@ const reducer = (state, action) => {
 
 function dispatch(action) {
   state = reducer(state, action);
+  updateDOM(state);
 }
 
 function tick() {
   const timeOut = setTimeout(() => {
     dispatch({
       type: "tick",
-      payload: new Date(),
+      payload: Date.now(),
     });
-    console.log("state", state);
+    requestAnimationFrame(tick);
   }, 1000);
+}
+
+function updateDOM(state) {
+  const elapsedTime = state.currentTime - state.startTime;
+  const seconds = elapsedTime / 1000;
+  timerOutput.textContent = Math.floor(seconds);
 }
