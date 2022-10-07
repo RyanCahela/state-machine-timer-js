@@ -1,0 +1,23 @@
+body {
+  font-family: "Monaco", monospace;
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.timer {
+  max-width: min(calc(100% - 2rem), 300px);
+  margin-inline: auto;
+  border: 1px solid blue;
+  padding-inline: 2rem;
+  padding-block: 1rem;
+}
+
+.timer__output {
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+}
